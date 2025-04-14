@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="/css/editar.css"> <!-- Ruta del CSS -->
+</head>
+<body>
+    <div class="container mt-5">
+<h2>Editar Usuario</h2>
+        <form th:action="@{/guardarUsuario}" method="post" th:object="${usuario}">
+            <input type="hidden" th:field="*{id}"> <!-- Campo oculto para el ID -->
+            
+            <div class="form-group">
+                <label for="nombreUser">Nombre:</label>
+                <input type="text" class="form-control" id="nombreUser" name="nombreUser" th:field="*{nombreUser}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rol">Rol:</label>
+                <select class="form-control" id="rol" name="rol" th:field="*{rol}" required>
+                    <option value="Admin">Administrador</option>
+                    <option value="User">Usuario</option>
+                    <option value="Manager">Gerente</option>
+                </select>
+            </div>
+
+ 
+            <div class="d-flex">
+  						<button type="submit" class="btn btn-primary mr-2">Guardar Cambios</button>
+  					<button href="/userTable" class="btn btn-secondary">Cancelar</button>
+			</div>
+        </form>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html class="fixed" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{plantilla}">
+<head>
+    <title>Formulario de Cambios</title>
+</head>
+<body>
+<div layout:fragment="Contenidohtml">
+    <div class="container mt-5">
+        <h2>Formulario de Cambios</h2>
+        <form th:action="@{/guardarCambio}" method="POST" th:object="${nuevo}">
+            <!-- Campo para el Tipo de Cambio -->
+   <div class="form-group">
+        <label for="tipocambio">Tipo de Cambio:</label>
+        <select class="form-control" id="tipocambio" name="tipocambio" th:value="*{tipocambio}" required>
+            <option value="">Seleccione el tipo de cambio</option>
+            <option value="1">Cambio de Estructura</option>
+            <option value="2">Cambio de Datos</option>
+            <option value="3">Optimización</option>
+            <option value="4">Cambio en la Relación</option>
+            <option value="5">Configuración</option>
+        </select>
+    </div>
+
+            <!-- Campo para la Fecha de Cambio -->
+            <div class="form-group">
+                <label for="fechacambio">Fecha de Cambio:</label>
+                <input type="date" class="form-control" id="fechacambio" name="fechacambio" th:value="*{fechacambio}" required>
+            </div>
+
+            <!-- Campo para la Descripción -->
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" 
+                          placeholder="Ingrese la descripción" rows="3" th:value="*{descripcion}" required></textarea>
+            </div>
+
+            <!-- Campo para seleccionar Proyecto (relación fkProyectos) -->
+            <div class="form-group">
+                <label for="fkProyectos">Proyecto:</label>
+                <select class="form-control" id="fkProyectos" name="fkProyectos" required>
+                    <option value="">Seleccione un proyecto</option>
+                    <option th:each="proyecto : ${proyectos}" th:value="${proyecto.id}" th:text="${proyecto.nombreProyectos}"></option>
+                </select>
+            </div>
+
+            <!-- Campo para seleccionar Usuario (relación fkUser) -->
+            <div class="form-group">
+                <label for="fkUser">Usuario:</label>
+                <select class="form-control" id="fkUser" name="fkUser" required>
+                    <option value="">Seleccione un usuario</option>
+                    <option th:each="usuario : ${listaUsuarios}" th:value="${usuario.id}" th:text="${usuario.nombreUser}"></option>
+                </select>
+            </div>
+
+            <!-- Botón de envío -->
+            <button type="submit" class="btn btn-primary">Guardar Cambio</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

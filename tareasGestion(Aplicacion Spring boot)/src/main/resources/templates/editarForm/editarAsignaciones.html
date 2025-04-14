@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editar Asignación</title>
+<link rel="stylesheet" href="/css/editar.css">
+</head>
+<body>
+	<div class="container mt-5">
+		<h2>Formulario de Asignación</h2>
+		<form th:action="@{/guardarAsignacion}" method="post" th:object="${nuevo}">
+			<input type="hidden" th:field="*{id}">
+
+			<!-- Campo para la Fecha de Asignación -->
+			<div class="form-group">
+				<label for="fechaasing">Fecha de Asignación:</label>
+				<input type="date" class="form-control" id="fechaasing" name="fechaasing"
+					th:value="*{fechaasing}" placeholder="Seleccione la fecha de asignación" required>
+			</div>
+
+			<!-- Campo para seleccionar Usuario (relación fkUser) -->
+			<div class="form-group">
+				<label for="fkUser">Usuario:</label>
+				<select class="form-control" id="fkUser" name="fkUser" required>
+					<option value="">Seleccione un usuario</option>
+					<option th:each="usuario : ${listaUsuarios}" th:value="${usuario.id}"
+						th:text="${usuario.nombreUser}">
+					</option>
+				</select>
+			</div>
+
+			<!-- Campo para seleccionar Tarea (relación fkTareas) -->
+			<div class="form-group">
+				<label for="fkTareas">Tarea:</label>
+				<select class="form-control" id="fkTareas" name="fkTareas" required>
+					<option value="">Seleccione una tarea</option>
+					<option th:each="tarea : ${listaTareas}" th:value="${tarea.id}"
+						th:text="${tarea.nombreTarea}">
+					</option>
+				</select>
+			</div>
+
+			<!-- Botón de envío -->
+			<button type="submit" class="btn btn-primary">Guardar Asignación</button>
+			<button type="button" class="btn btn-secondary" onclick="window.location.href='/asignacionesTable';">Cancelar</button>
+		</form>
+	</div>
+</body>
+</html>
+
+

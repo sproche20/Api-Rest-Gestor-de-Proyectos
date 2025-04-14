@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editar Tarea</title>
+<link rel="stylesheet" href="/css/editar.css">
+</head>
+<body>
+	<div class="container mt-5">
+		<h2>Formulario de Tareas</h2>
+		<form th:action="@{/guardarTarea}" method="post" th:object="${tareas}">
+			<input type="hidden" th:field="*{id}">
+			<div class="form-group">
+				<label for="nombreTarea">Nombre de la Tarea:</label> <input
+					type="text" class="form-control" id="nombreTarea"
+					name="nombreTarea" placeholder="Ingrese el nombre de la tarea"
+					th:value="*{nombreTarea}" required>
+			</div>
+			<div class="form-group">
+				<label for="descripcion">Descripción:</label>
+				<textarea class="form-control" id="descripcion" name="descripcion"
+					rows="4" placeholder="Ingrese una descripción"
+					th:field="*{descripcion}" required></textarea>
+			</div>
+
+			<div class="form-group">
+				<label for="fechaInicio">Fecha de Inicio:</label> <input type="date"
+					class="form-control" id="fechaInicio" name="fechaInicio"
+					th:value="*{fechaInicio}" required>
+			</div>
+
+			<div class="form-group">
+				<label for="fechaFin">Fecha de Fin:</label> <input type="date"
+					class="form-control" id="fechaFin" name="fechaFin"
+					th:value="*{fechaFin}" required>
+			</div>
+
+			<div class="form-group">
+				<label for="estado">Estado:</label> <select class="form-control"
+					id="estado" name="estado" th:value="*{estado}" required>
+					<option value="Pendiente">Pendiente</option>
+					<option value="En Progreso">En Progreso</option>
+					<option value="Completado">Completado</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="fkProyectos">Proyecto:</label> <select
+					class="form-control" id="fkProyectos" name="fkProyectos" required>
+					<option th:each="proyecto : ${proyectos}" th:value="${proyecto.id}"
+						th:text="${proyecto.nombreProyectos}">Proyecto</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Guardar</button>
+			<button type="button" class="btn btn-secondary"
+				onclick="window.location.href='/tareasTable';">Cancelar</button>
+		</form>
+	</div>
+</body>
+</html>

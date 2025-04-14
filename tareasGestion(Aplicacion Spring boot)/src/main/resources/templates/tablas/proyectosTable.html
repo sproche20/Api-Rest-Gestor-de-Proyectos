@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="fixed" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{plantilla}">
+<head>
+    <title>Lista de Proyectos</title>
+</head>
+<body>
+<div layout:fragment="Contenidohtml">
+    <div class="container mt-5">
+        <h2>Lista de Proyectos</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre del Proyecto</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="proyecto : ${listaProyectos}">
+                    <td th:text="${proyecto.id}"></td>
+                    <td th:text="${proyecto.nombreProyectos}"></td>
+                    <td th:text="${proyecto.descripcion}"></td>
+                    <td th:text="${proyecto.fechaInicio}"></td>
+                    <td th:text="${proyecto.fechaFin}"></td>
+                    <td th:text="${proyecto.estado}"></td>
+                    <td>
+                        <a th:href="@{/editarProyecto/}+${proyecto.id}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/eliminarProyecto/{id}(id=${proyecto.id})}" 
+                           class="btn btn-danger btn-sm" 
+                           onclick="return confirm('¿Estás seguro de eliminar este proyecto?')">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/proyectosForm" class="btn btn-primary">Nuevo Proyecto</a>
+    </div>
+</div>
+</body>
+</html>
